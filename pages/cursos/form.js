@@ -1,14 +1,19 @@
 import Pagina from '@/components/Pagina'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
 import React from 'react'
 import { Button, Form } from 'react-bootstrap'
 import { useForm } from 'react-hook-form'
 
-const form = (form) => {
+const form = () => {
+    const { push } = useRouter()
     const { register, handleSubmit } = useForm()
 
     function salvar(dados){
-        console.log(dados);
-        
+        const cursos = JSON.parse(window.localStorage.getItem('cursos')) || []
+        cursos.push(dados)
+        window.localStorage.setItem('cursos', JSON.stringify(cursos))
+        push('/cursos')
     }
     return (
         <Pagina titulo='Formulário'>
@@ -31,10 +36,12 @@ const form = (form) => {
                 </Form.Group>
 
 
-                <Button variant="primary" type="submit" onClick={handleSubmit(salvar)}>
+                
+                <Button variant="primary" type="submit" onClick={handleSubmit(salvar) }>
 
                     Salvar
                 </Button>
+            
             </Form>
 
         </Pagina>
