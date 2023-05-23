@@ -3,7 +3,10 @@ import Pagina from '@/components/Pagina'
 import Table from 'react-bootstrap/Table'
 import { Button } from 'react-bootstrap'
 import { Bs } from 'react-icons'
+import { Go } from 'react-icons'
+import { GoPencil } from 'react-icons/go'
 import { BsFillTrashFill } from 'react-icons/bs'
+import Link from 'next/link'
 
 const index = () => {
 
@@ -18,11 +21,13 @@ const index = () => {
     }
 
     function excluir(id){
-        
-        const itens = getAll()
-        itens.splice(id, 1)
-        window.localStorage.setItem('cursos', JSON.stringify(itens))
-        setCursos(itens)
+        if (confirm('deseja realmente excluir o registro?')){
+
+            const itens = getAll()
+            itens.splice(id, 1)
+            window.localStorage.setItem('cursos', JSON.stringify(itens))
+            setCursos(itens)
+        }
 
     }
 
@@ -43,7 +48,12 @@ const index = () => {
 
                     {cursos.map((item, i) => (
                      < tr key={i} >
-                        <td><BsFillTrashFill onClick={()=>excluir(i)} className='text-warning'/></td>
+                        <td>
+                            <Link href={'/cursos/' + i}>
+                            <GoPencil type='Alterar' className='text-primary'/>
+                            </Link>
+                            {' '}
+                            <BsFillTrashFill onClick={()=>excluir(i)} className='text-warning'/></td>
                         <td>{item.nome}</td>
                         <td>{item.duracao}</td>
                         <td>{item.modalidade}</td>

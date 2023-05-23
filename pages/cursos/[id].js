@@ -1,17 +1,32 @@
 import Pagina from '@/components/Pagina'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import React from 'react'
 import { Button, Form } from 'react-bootstrap'
 import { useForm } from 'react-hook-form'
 import { BsCheckLg } from 'react-icons/bs'
 import { AiOutlineArrowLeft } from 'react-icons/ai'
+import React, { useEffect, useState } from 'react'
 
 const form = () => {
-    const { push } = useRouter()
-    const { register, handleSubmit } = useForm()
+    const { push, query } = useRouter()
+    const { register, handleSubmit, setValue } = useForm()
 
-    function salvar(dados){
+    useEffect(() => {
+
+        if (query.id) {
+            const id = query.id
+            const cursos = JSON.parse(window.localStorage.getItem('cursos'))
+            const curso = cursos[id]
+
+            for(let atributo in curso){
+                setValue(atributo, curso[atributo])
+            }
+        }
+
+    }, [query.id])
+
+
+    function salvar(dados) {
         const cursos = JSON.parse(window.localStorage.getItem('cursos')) || []
         cursos.push(dados)
         window.localStorage.setItem('cursos', JSON.stringify(cursos))
@@ -40,15 +55,15 @@ const form = () => {
 
                 <div className='text-center'>
 
-                <Link className='btn btn-danger' href="/cursos">
-                    <AiOutlineArrowLeft className="me-2"/>
-                    Voltar
-                
-                </Link>
-                <Button className='ms-2' variant="success" onClick={handleSubmit(salvar) }>
-                    <BsCheckLg className=' me-2'/>
-                    Salvar
-                </Button>
+                    <Link className='btn btn-danger' href="/cursos">
+                        <AiOutlineArrowLeft className="me-2" />
+                        Voltar
+
+                    </Link>
+                    <Button className='ms-2' variant="success" onClick={handleSubmit(salvar)}>
+                        <BsCheckLg className=' me-2' />
+                        Salvar
+                    </Button>
                 </div>
             </Form>
 
