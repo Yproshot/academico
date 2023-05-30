@@ -7,15 +7,27 @@ import { Go } from 'react-icons'
 import { GoPencil } from 'react-icons/go'
 import { BsFillTrashFill } from 'react-icons/bs'
 import Link from 'next/link'
+import axios from 'axios'
+import { get } from 'firebase/database'
 
 const index = () => {
 
     const [disciplinas, setDisciplinas] = useState([])
 
     useEffect(() => {
-        setDisciplinas(getAll())
-    }, [ ])
+        getAll()
+    }, [])
 
+    function getAll(){
+        axios.get('/api/disciplinas').then( resultado => {
+            setDisciplinas(resultado.data);
+        })
+    }
+    
+    function excluir(id){
+        axios.delete('/api/disciplinas/' + id)
+        getAll()
+    }
 
     return (
         <Pagina titulo='Disciplinas'>
@@ -25,24 +37,22 @@ const index = () => {
                 <thead>
                     <tr>
                         <th> </th>
-                        <th>Nome</th>
+                        <th>Disciplinas</th>
                         <th>Duracao</th>
-                        <th>Modalidade</th>
                     </tr>
                 </thead>
                 <tbody>
 
-                    {disciplinas.map((item, i) => (
-                        < tr key={i} >
+                    {disciplinas.map((item) => (
+                        < tr key={item.id} >
                             <td>
-                                <Link href={'/disciplinas/' + i}>
+                                <Link href={'/disciplinas/'}>
                                     <GoPencil type='Alterar' className='text-primary' />
                                 </Link>
                                 {' '}
-                                <BsFillTrashFill onClick={() => excluir(i)} className='text-warning' /></td>
-                            <td>{item.nome}</td>
+                                <BsFillTrashFill onClick={() => excluir(item.id)} className='text-warning' /></td>
+                            <td>{item.disciplinas}</td>
                             <td>{item.duracao}</td>
-                            <td>{item.modalidade}</td>
                         </tr>
                     ))}
 

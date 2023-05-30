@@ -10,7 +10,7 @@ function Cabecalho() {
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
             <Nav.Link href="../anime">Cursos</Nav.Link>
-            <Nav.Link href="../anime/generos">Disciplinas</Nav.Link>
+            <Nav.Link href="../disciplinas/form">Disciplinas</Nav.Link>
             <Nav.Link href="../anime/generos">Alunos</Nav.Link>
             <Nav.Link href="../anime/generos">Professores</Nav.Link>
             <Nav.Link href="../anime/generos">Turmas</Nav.Link>

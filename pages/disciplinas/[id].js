@@ -7,68 +7,58 @@ import { BsCheckLg } from 'react-icons/bs'
 import { AiOutlineArrowLeft } from 'react-icons/ai'
 import React, { useEffect, useState } from 'react'
 
-const form = () => {
-    const { push, query } = useRouter()
-    const { register, handleSubmit, setValue } = useForm()
+const index = () => {
+
+    const [disciplinas, setDisciplinas] = useState([])
 
     useEffect(() => {
+        getAll()
+    }, [])
 
-        if (query.id) {
-            const id = query.id
-            const cursos = JSON.parse(window.localStorage.getItem('cursos'))
-            const curso = cursos[id]
-
-            for(let atributo in curso){
-                setValue(atributo, curso[atributo])
-            }
-        }
-
-    }, [query.id])
-
-
-    function salvar(dados) {
-        const cursos = JSON.parse(window.localStorage.getItem('cursos')) || []
-        cursos.splice(query.id, 1, dados)
-        window.localStorage.setItem('cursos', JSON.stringify(cursos))
-        push('/cursos')
+    function getAll(){
+        axios.get('/api/disciplinas').then( resultado => {
+            setDisciplinas(resultado.data);
+        })
     }
+    
+    function excluir(id){
+        axios.delete('/api/disciplinas/' + id)
+        getAll()
+    }
+
     return (
-        <Pagina titulo='Formulário'>
-            <Form>
-                <Form.Group className="mb-3" controlId="nome">
-                    <Form.Label>Nome:</Form.Label>
-                    <Form.Control type="text" {...register('nome')} />
-                </Form.Group>
+        <Pagina titulo="Disciplinas">
 
+            <Link href="/disciplinas/form" className='mb-2 btn btn-primary'>
+                Novo
+            </Link>
 
-                <Form.Group className="mb-3" controlId="duracao">
-                    <Form.Label>Duração:</Form.Label>
-                    <Form.Control type="text" {...register('duracao')} />
-                </Form.Group>
-
-
-                <Form.Group className="mb-3" controlId="Modalidade">
-                    <Form.Label>Modalidade:</Form.Label>
-                    <Form.Control type="text" {...register('modalidade')} />
-                </Form.Group>
-
-
-                <div className='text-center'>
-
-                    <Link className='btn btn-danger' href="/cursos">
-                        <AiOutlineArrowLeft className="me-2" />
-                        Voltar
-
-                    </Link>
-                    <Button className='ms-2' variant="success" onClick={handleSubmit(salvar)}>
-                        <BsCheckLg className=' me-2' />
-                        Salvar
-                    </Button>
-                </div>
-            </Form>
-
+            <Table striped bordered hover>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Nome</th>
+                        <th>Curso</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {disciplinas.map( item => (
+                        <tr key={item.id}>
+                            <td>
+                                <Link href={'/disciplinas/' + item.id}>
+                                    <BsPencilFill title="Alterar" className='text-primary' />
+                                </Link>
+                                {' '}
+                                <BsFillTrash3Fill title="Excluir" onClick={() => excluir(item.id)} className='text-danger' />
+                            </td>
+                            <td>{item.nome}</td>
+                            <td>{item.curso}</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </Table>
         </Pagina>
     )
 }
 
-export default form
+export default index
