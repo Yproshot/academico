@@ -1,64 +1,60 @@
-import Pagina from '@/components/Pagina'
-import Link from 'next/link'
-import { useRouter } from 'next/router'
-import { Button, Form } from 'react-bootstrap'
-import { useForm } from 'react-hook-form'
-import { BsCheckLg } from 'react-icons/bs'
-import { AiOutlineArrowLeft } from 'react-icons/ai'
-import React, { useEffect, useState } from 'react'
+import Pagina from "@/components/Pagina";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
+import { Button, Form } from "react-bootstrap";
+import { useForm } from "react-hook-form";
+import { BsSave } from "react-icons/Bs"
+import { AiOutlineRollback } from "react-icons/Ai"
+import axios from "axios";
 
-const index = () => {
+const form = () => {
 
-    const [disciplinas, setDisciplinas] = useState([])
+  const { push, query } = useRouter()
+  const { register, handleSubmit, setValue } = useForm()
 
-    useEffect(() => {
-        getAll()
-    }, [])
-
-    function getAll(){
-        axios.get('/api/disciplinas').then( resultado => {
-            setDisciplinas(resultado.data);
-        })
+  useEffect(() => {
+    if(query.id){
+      axios.get('/api/disciplinas/' + query.id).then(resultado => {
+        const disciplinas = resultado.data
+        
+        
+        for(let atributo in disciplinas){
+          setValue(atributo, disciplinas[atributo])
+        }
+      })
     }
-    
-    function excluir(id){
-        axios.delete('/api/disciplinas/' + id)
-        getAll()
-    }
+  }, [query.id]);
 
-    return (
-        <Pagina titulo="Disciplinas">
+  function salvar(dados){
+    axios.put('/api/disciplinas/' + query.id, dados)
+    push('/disciplinas/')
 
-            <Link href="/disciplinas/form" className='mb-2 btn btn-primary'>
-                Novo
-            </Link>
+  }
 
-            <Table striped bordered hover>
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Nome</th>
-                        <th>Curso</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {disciplinas.map( item => (
-                        <tr key={item.id}>
-                            <td>
-                                <Link href={'/disciplinas/' + item.id}>
-                                    <BsPencilFill title="Alterar" className='text-primary' />
-                                </Link>
-                                {' '}
-                                <BsFillTrash3Fill title="Excluir" onClick={() => excluir(item.id)} className='text-danger' />
-                            </td>
-                            <td>{item.nome}</td>
-                            <td>{item.curso}</td>
-                        </tr>
-                    ))}
-                </tbody>
-            </Table>
-        </Pagina>
-    )
-}
+  return (
+    <Pagina titulo="Disciplinas">
+        <Form>
+      <Form.Group className="mb-3" controlId="nome">
+        <Form.Label>Nome:</Form.Label>
+        <Form.Control type="text" {...register('nome')}/>
+      </Form.Group>
+      <Form.Group className="mb-3" controlId="curso">
+        <Form.Label>Disciplina:</Form.Label>
+        <Form.Control type="text" {...register('disciplina')} />
+      </Form.Group>
+      <Button variant="primary" onClick={handleSubmit(salvar)}>
+        <BsSave className="me-2"/>
+        Salvar
+      </Button>
+      <Link className="ms-2 btn btn-danger" href={'/disciplinas'}>
+        <AiOutlineRollback className="me-2"/>
+        Voltar
+      </Link>
 
-export default index
+    </Form>
+    </Pagina>
+  );
+};
+
+export default form;
