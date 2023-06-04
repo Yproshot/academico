@@ -4,8 +4,8 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
-import { BsSave } from "react-icons/bs"
-import { AiOutlineRollback } from "react-icons/ai"
+import { BsSave } from "react-icons/Bs"
+import { AiOutlineRollback } from "react-icons/Ai"
 import axios from "axios";
 
 const form = () => {
@@ -39,7 +39,7 @@ const form = () => {
         <Form.Label>Nome:</Form.Label>
         <Form.Control type="text" {...register('nome')}/>
       </Form.Group>
-      <Form.Group className="mb-3" controlId="disciplina">
+      <Form.Group className="mb-3" controlId="curso">
         <Form.Label>Disciplina:</Form.Label>
         <Form.Control type="text" {...register('disciplina')} />
       </Form.Group>

@@ -14,34 +14,29 @@ const form = () => {
 
     function salvar(dados) {
 
-    axios.post('/api/cursos', dados)
-    push('/cursos')
+    axios.post('/api/disciplinas', dados)
+    push('/disciplinas')
 
 
     }
     return (
-        <Pagina titulo='Cursos'>
+        <Pagina titulo='Disciplinas'>
             <Form>
-                <Form.Group className="mb-3" controlId="cursos">
+                <Form.Group className="mb-3" controlId="disciplinas">
                     <Form.Label>Nome:</Form.Label>
                     <Form.Control type="text" {...register('nome')} />
                 </Form.Group>
 
 
                 <Form.Group className="mb-3" controlId="duracao">
-                    <Form.Label>Duração:</Form.Label>
-                    <Form.Control type="text" {...register('duracao')} />
-                </Form.Group>
-               
-                <Form.Group className="mb-3" controlId="duracao">
-                    <Form.Label>Modalidade:</Form.Label>
-                    <Form.Control type="text" {...register('modalidade')} />
+                    <Form.Label>Disciplina:</Form.Label>
+                    <Form.Control type="text" {...register('disciplina')} />
                 </Form.Group>
 
 
                 <div className='text-center'>
 
-                    <Link className='btn btn-danger' href="/cursos">
+                    <Link className='btn btn-danger' href="/disciplinas">
                         <AiOutlineArrowLeft className="me-2" />
                         Voltar
 

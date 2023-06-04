@@ -7,30 +7,29 @@ import { Go } from 'react-icons'
 import { GoPencil } from 'react-icons/go'
 import { BsFillTrashFill } from 'react-icons/bs'
 import Link from 'next/link'
+import axios from 'axios'
 
 const index = () => {
-
-    const [cursos, setCursos] = useState([])
+    const [cursos, setCursos] = useState([]);
 
     useEffect(() => {
-        setCursos(getAll())
-    }, [])
-
+        axios.get('/api/cursos').then( resultado => {
+          setCursos(resultado.data);
+        })
+    }, []);
+  
     function getAll(){
-        return JSON.parse(window.localStorage.getItem('cursos')) || []
+      axios.get('/api/cursos').then(resultado => {
+        setCursos(resultado.data)
+      })
     }
-
+  
     function excluir(id){
-        if (confirm('deseja realmente excluir o registro?')){
-
-            const itens = getAll()
-            itens.splice(id, 1)
-            window.localStorage.setItem('cursos', JSON.stringify(itens))
-            setCursos(itens)
-        }
-
+      if (confirm('Deseja realmente excluir o registro?')){
+        axios.delete('/api/cursos/' + id)
+        getAll()
+      }
     }
-
     return (
         <Pagina titulo='Cursos'>
 
@@ -47,9 +46,9 @@ const index = () => {
                 <tbody>
 
                     {cursos.map((item, i) => (
-                     < tr key={i} >
+                     < tr key= {i} >
                         <td>
-                            <Link href={'/cursos/' + i}>
+                            <Link href={'/cursos/' + item.id}>
                             <GoPencil type='Alterar' className='text-primary'/>
                             </Link>
                             {' '}

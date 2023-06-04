@@ -9,13 +9,13 @@ function Cabecalho() {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="../anime">Cursos</Nav.Link>
-            <Nav.Link href="../disciplinas/form">Disciplinas</Nav.Link>
-            <Nav.Link href="../anime/generos">Alunos</Nav.Link>
-            <Nav.Link href="../anime/generos">Professores</Nav.Link>
-            <Nav.Link href="../anime/generos">Turmas</Nav.Link>
-            <Nav.Link href="../anime/generos">Salas</Nav.Link>
-            <Nav.Link href="../anime/generos">Semestres</Nav.Link>
+            <Nav.Link href="../cursos">Cursos</Nav.Link>
+            <Nav.Link href="../disciplinas">Disciplinas</Nav.Link>
+            <Nav.Link href="../alunos">Alunos</Nav.Link>
+            <Nav.Link href="../professores">Professores</Nav.Link>
+            <Nav.Link href="../turmas">Turmas</Nav.Link>
+            <Nav.Link href="../salas">Salas</Nav.Link>
+            <Nav.Link href="../semestres">Semestres</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
