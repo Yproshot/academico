@@ -9,53 +9,69 @@ import { BiEditAlt } from "react-icons/Bi"
 import axios from "axios";
 
 const index = () => {
-  const [disciplinas, setDisciplinas] = useState([]);
+  const [alunos, setAlunos] = useState([]);
 
   useEffect(() => {
-      axios.get('/api/disciplinas').then( resultado => {
-        setDisciplinas(resultado.data);
+      axios.get('/api/alunos').then( resultado => {
+        setAlunos(resultado.data);
       })
   }, []);
 
   function getAll(){
-    axios.get('/api/disciplinas').then(resultado => {
-      setDisciplinas(resultado.data)
+    axios.get('/api/alunos').then(resultado => {
+      setAlunos(resultado.data)
     })
   }
 
   function excluir(id){
     if (confirm('Deseja realmente excluir o registro?')){
-      axios.delete('/api/disciplinas/' + id)
+      axios.delete('/api/alunos/' + id)
       getAll()
     }
   }
 
   return (
-    <Pagina titulo="Disciplinas">
+    <Pagina titulo="Alunos">
 
-      <Link href="/disciplinas/form" className="mb-2 btn btn-primary">
+      <Link href="/alunos/form" className="mb-2 btn btn-primary">
         <AiFillPlusCircle /> Novo
       </Link>
       <Table striped bordered hover>
         <thead>
           <tr>
-            <th>Apagar</th>
+          <th>Apagar</th>
             <th>Nome</th>
-            <th>Disciplina</th>
+            <th>CPF</th>
+            <th>Matricula</th>
+            <th>Email</th>
+            <th>Telefone</th>
+            <th>CEP</th>
+            <th>Logadouro</th>
+            <th>Complemento</th>
+            <th>Num.</th>
+            <th>Bairro</th>
           </tr>
         </thead>
         <tbody>
-          {disciplinas.map(item => (
+          {alunos.map(item => (
             <tr key={item.id}>
               <td>
-                <Link href={'/disciplinas/' + item.id}> 
+                <Link href={'/alunos/' + item.id}> 
                 <BiEditAlt title='Alterar' className="text-primary" />
                 </Link>
                 {' '}
                 <FaRegTrashAlt onClick={()=>excluir(item.id)} className="text-danger" />
               </td>
-              <td>{item.nome}</td>
-              <td>{item.disciplina}</td>
+              <th>{item.nome}</th>
+            <th>{item.cpf}</th>
+            <th>{item.matricula}</th>
+            <th>{item.email}</th>
+            <th>{item.telefone}</th>
+            <th>{item.cep}</th>
+            <th>{item.logadouro}</th>
+            <th>{item.complemento}</th>
+            <th>{item.numero}</th>
+            <th>{item.bairro}</th>
             </tr>
           ))}
         </tbody>

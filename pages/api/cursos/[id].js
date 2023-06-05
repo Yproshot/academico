@@ -13,7 +13,7 @@ export default function handler(req, res) {
   } else if (req.method == "PUT") {
     const dados = req.body;
 
-    update(ref(db, "cursos/" + id), dados)
+    update(ref(db, "cursos/" + id), dados);
 
     } else if (req.method == "DELETE") {
 

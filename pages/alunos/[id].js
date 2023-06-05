@@ -1,28 +1,41 @@
-import Pagina from '@/components/Pagina'
-import Link from 'next/link'
-import { useRouter } from 'next/router'
-import React from 'react'
-import { Button, Form } from 'react-bootstrap'
-import { useForm } from 'react-hook-form'
-import { BsCheckLg } from 'react-icons/bs'
-import { AiOutlineArrowLeft } from 'react-icons/ai'
-import axios from 'axios'
+import Pagina from "@/components/Pagina";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
+import { Button, Form } from "react-bootstrap";
+import { useForm } from "react-hook-form";
+import { BsSave } from "react-icons/bs"
+import { AiOutlineRollback } from "react-icons/ai"
+import axios from "axios";
 
 const form = () => {
-    const { push } = useRouter()
-    const { register, handleSubmit } = useForm()
 
-    function salvar(dados) {
+  const { push, query } = useRouter()
+  const { register, handleSubmit, setValue } = useForm()
 
-    axios.post('/api/professores', dados)
-    push('/professores')
-
-
+  useEffect(() => {
+    if(query.id){
+      axios.get('/api/alunos/' + query.id).then(resultado => {
+        const alunos = resultado.data
+        
+        
+        for(let atributo in alunos){
+          setValue(atributo, alunos[atributo])
+        }
+      })
     }
-    return (
-        <Pagina titulo='Professores'>
-            <Form>
-                <Form.Group className="mb-3" controlId="nome">
+  }, [query.id]);
+
+  function salvar(dados){
+    axios.put('/api/alunos/' + query.id, dados)
+    push('/alunos/')
+
+  }
+
+  return (
+    <Pagina titulo="Alunos">
+      <Form>
+                <Form.Group className="mb-3" controlId="professores">
                     <Form.Label>Nome:</Form.Label>
                     <Form.Control type="text" {...register('nome')} />
                 </Form.Group>
@@ -36,11 +49,6 @@ const form = () => {
                 <Form.Group className="mb-3" controlId="matricula">
                     <Form.Label>Matricula:</Form.Label>
                     <Form.Control type="text" {...register('matricula')} />
-                </Form.Group>
-                
-                <Form.Group className="mb-3" controlId="salario">
-                    <Form.Label>Salario:</Form.Label>
-                    <Form.Control type="text" {...register('salario')} />
                 </Form.Group>
                 
                 <Form.Group className="mb-3" controlId="email">
@@ -78,24 +86,18 @@ const form = () => {
                     <Form.Label>Bairro:</Form.Label>
                     <Form.Control type="text" {...register('bairro')} />
                 </Form.Group>
+      <Button variant="primary" onClick={handleSubmit(salvar)}>
+        <BsSave className="me-2"/>
+        Salvar
+      </Button>
+      <Link className="ms-2 btn btn-danger" href={'/alunos'}>
+        <AiOutlineRollback className="me-2"/>
+        Voltar
+      </Link>
 
+    </Form>
+    </Pagina>
+  );
+};
 
-                <div className='text-center'>
-
-                    <Link className='btn btn-danger' href="/professores">
-                        <AiOutlineArrowLeft className="me-2" />
-                        Voltar
-
-                    </Link>
-                    <Button className='ms-2' variant="success" onClick={handleSubmit(salvar)}>
-                        <BsCheckLg className=' me-2' />
-                        Salvar
-                    </Button>
-                </div>
-            </Form>
-
-        </Pagina>
-    )
-}
-
-export default form
+export default form;

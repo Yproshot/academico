@@ -9,31 +9,31 @@ import { BiEditAlt } from "react-icons/Bi"
 import axios from "axios";
 
 const index = () => {
-  const [disciplinas, setDisciplinas] = useState([]);
+  const [semestres, setSemestres] = useState([]);
 
   useEffect(() => {
-      axios.get('/api/disciplinas').then( resultado => {
-        setDisciplinas(resultado.data);
+      axios.get('/api/semestres').then( resultado => {
+        setSemestres(resultado.data);
       })
   }, []);
 
   function getAll(){
-    axios.get('/api/disciplinas').then(resultado => {
-      setDisciplinas(resultado.data)
+    axios.get('/api/semestres').then(resultado => {
+      setSemestres(resultado.data)
     })
   }
 
   function excluir(id){
     if (confirm('Deseja realmente excluir o registro?')){
-      axios.delete('/api/disciplinas/' + id)
+      axios.delete('/api/semestres/' + id)
       getAll()
     }
   }
 
   return (
-    <Pagina titulo="Disciplinas">
+    <Pagina titulo="Semestres">
 
-      <Link href="/disciplinas/form" className="mb-2 btn btn-primary">
+      <Link href="/semestres/form" className="mb-2 btn btn-primary">
         <AiFillPlusCircle /> Novo
       </Link>
       <Table striped bordered hover>
@@ -41,21 +41,23 @@ const index = () => {
           <tr>
             <th>Apagar</th>
             <th>Nome</th>
-            <th>Disciplina</th>
+            <th>Data inicio</th>
+            <th>Data fim</th>
           </tr>
         </thead>
         <tbody>
-          {disciplinas.map(item => (
+          {semestres.map(item => (
             <tr key={item.id}>
               <td>
-                <Link href={'/disciplinas/' + item.id}> 
+                <Link href={'/semestres/' + item.id}> 
                 <BiEditAlt title='Alterar' className="text-primary" />
                 </Link>
                 {' '}
                 <FaRegTrashAlt onClick={()=>excluir(item.id)} className="text-danger" />
               </td>
               <td>{item.nome}</td>
-              <td>{item.disciplina}</td>
+              <td>{item.data_inicio}</td>
+              <td>{item.data_fim}</td>
             </tr>
           ))}
         </tbody>

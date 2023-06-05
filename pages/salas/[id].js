@@ -15,25 +15,25 @@ const form = () => {
 
   useEffect(() => {
     if(query.id){
-      axios.get('/api/cursos/' + query.id).then(resultado => {
-        const cursos = resultado.data
+      axios.get('/api/salas/' + query.id).then(resultado => {
+        const salas = resultado.data
         
         
-        for(let atributo in cursos){
-          setValue(atributo, cursos[atributo])
+        for(let atributo in salas){
+          setValue(atributo, salas[atributo])
         }
       })
     }
   }, [query.id]);
 
   function salvar(dados){
-    axios.put('/api/cursos/' + query.id, dados)
-    push('/cursos/')
+    axios.put('/api/salas/' + query.id, dados)
+    push('/salas/')
 
   }
 
   return (
-    <Pagina titulo="Cursos">
+    <Pagina titulo="Salas">
             <Form>
                 <Form.Group className="mb-3" controlId="nome">
                     <Form.Label>Nome:</Form.Label>
@@ -41,21 +41,20 @@ const form = () => {
                 </Form.Group>
 
 
-                <Form.Group className="mb-3" controlId="duracao">
-                    <Form.Label>Duração:</Form.Label>
-                    <Form.Control type="text" {...register('duracao')} />
+                <Form.Group className="mb-3" controlId="capacidade">
+                    <Form.Label>Capacidade:</Form.Label>
+                    <Form.Control type="text" {...register('capacidade')} />
                 </Form.Group>
 
-
-                <Form.Group className="mb-3" controlId="modalidade">
-                    <Form.Label>Modalidade:</Form.Label>
-                    <Form.Control type="text" {...register('modalidade')} />
+                <Form.Group className="mb-3" controlId="tipo">
+                    <Form.Label>Tipo:</Form.Label>
+                    <Form.Control type="text" {...register('tipo')} />
                 </Form.Group>
       <Button variant="primary" onClick={handleSubmit(salvar)}>
         <BsSave className="me-2"/>
         Salvar
       </Button>
-      <Link className="ms-2 btn btn-danger" href={'/cursos'}>
+      <Link className="ms-2 btn btn-danger" href={'/salas'}>
         <AiOutlineRollback className="me-2"/>
         Voltar
       </Link>

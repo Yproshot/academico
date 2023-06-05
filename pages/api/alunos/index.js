@@ -6,7 +6,7 @@ export default function handler(req, res) {
 
   if (req.method == 'GET') {
 
-    get(child(ref(db), 'disciplinas')).then(snapshot=>{
+    get(child(ref(db), 'alunos')).then(snapshot=>{
 
       const retorno = []
 
@@ -23,7 +23,7 @@ export default function handler(req, res) {
     const dados = req.body
     dados.id = uuid
   
-    set(ref(db, 'disciplinas/' + uuid), dados)
+    set(ref(db, 'alunos/' + uuid), dados)
 
   }
 

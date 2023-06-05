@@ -15,47 +15,48 @@ const form = () => {
 
   useEffect(() => {
     if(query.id){
-      axios.get('/api/cursos/' + query.id).then(resultado => {
-        const cursos = resultado.data
+      axios.get('/api/semestres/' + query.id).then(resultado => {
+        const semestres = resultado.data
         
         
-        for(let atributo in cursos){
-          setValue(atributo, cursos[atributo])
+        for(let atributo in semestres){
+          setValue(atributo, semestres[atributo])
         }
       })
     }
   }, [query.id]);
 
   function salvar(dados){
-    axios.put('/api/cursos/' + query.id, dados)
-    push('/cursos/')
+    axios.put('/api/semestres/' + query.id, dados)
+    push('/semestres/')
 
   }
 
   return (
-    <Pagina titulo="Cursos">
+    <Pagina titulo="Semestres">
             <Form>
-                <Form.Group className="mb-3" controlId="nome">
+                <Form.Group className="mb-3" controlId="semestres">
                     <Form.Label>Nome:</Form.Label>
                     <Form.Control type="text" {...register('nome')} />
                 </Form.Group>
 
 
-                <Form.Group className="mb-3" controlId="duracao">
-                    <Form.Label>Duração:</Form.Label>
-                    <Form.Control type="text" {...register('duracao')} />
+                <Form.Group className="mb-3" controlId="data_inicio">
+                    <Form.Label>Data Inicio:</Form.Label>
+                    <Form.Control type="text" {...register('data_inicio')} />
                 </Form.Group>
 
 
-                <Form.Group className="mb-3" controlId="modalidade">
-                    <Form.Label>Modalidade:</Form.Label>
-                    <Form.Control type="text" {...register('modalidade')} />
+                <Form.Group className="mb-3" controlId="data_fim">
+                    <Form.Label>Data fim:</Form.Label>
+                    <Form.Control type="text" {...register('data_fim')} />
                 </Form.Group>
+
       <Button variant="primary" onClick={handleSubmit(salvar)}>
         <BsSave className="me-2"/>
         Salvar
       </Button>
-      <Link className="ms-2 btn btn-danger" href={'/cursos'}>
+      <Link className="ms-2 btn btn-danger" href={'/semestres'}>
         <AiOutlineRollback className="me-2"/>
         Voltar
       </Link>

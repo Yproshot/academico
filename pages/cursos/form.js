@@ -22,7 +22,7 @@ const form = () => {
     return (
         <Pagina titulo='Cursos'>
             <Form>
-                <Form.Group className="mb-3" controlId="cursos">
+                <Form.Group className="mb-3" controlId="nome">
                     <Form.Label>Nome:</Form.Label>
                     <Form.Control type="text" {...register('nome')} />
                 </Form.Group>
@@ -32,8 +32,9 @@ const form = () => {
                     <Form.Label>Duração:</Form.Label>
                     <Form.Control type="text" {...register('duracao')} />
                 </Form.Group>
-               
-                <Form.Group className="mb-3" controlId="duracao">
+
+
+                <Form.Group className="mb-3" controlId="modalidade">
                     <Form.Label>Modalidade:</Form.Label>
                     <Form.Control type="text" {...register('modalidade')} />
                 </Form.Group>

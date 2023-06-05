@@ -13,7 +13,6 @@ function Cabecalho() {
             <Nav.Link href="../disciplinas">Disciplinas</Nav.Link>
             <Nav.Link href="../alunos">Alunos</Nav.Link>
             <Nav.Link href="../professores">Professores</Nav.Link>
-            <Nav.Link href="../turmas">Turmas</Nav.Link>
             <Nav.Link href="../salas">Salas</Nav.Link>
             <Nav.Link href="../semestres">Semestres</Nav.Link>
           </Nav>
