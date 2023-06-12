@@ -38,7 +38,7 @@ const form = () => {
                     <Form.Label>Duração:</Form.Label>
                     <Form.Control type="text" {...register('duracao', validatorCadastro.duracao)} />
                 </Form.Group>
-                {errors.nome && (
+                {errors.duracao && (
                     <span className="error-message bg-dark text-danger">
                       {errors.duracao.message}
                     </span>
@@ -49,7 +49,7 @@ const form = () => {
                     <Form.Label>Modalidade:</Form.Label>
                     <Form.Control type="text" {...register('modalidade', validatorCadastro.modalidade)} />
                 </Form.Group>
-                {errors.nome && (
+                {errors.modalidade && (
                     <span className="error-message bg-dark text-danger">
                       {errors.modalidade.message}
                     </span>

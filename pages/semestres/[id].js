@@ -40,7 +40,7 @@ const form = () => {
                     <Form.Label>Nome:</Form.Label>
                     <Form.Control type="text" {...register('nome', validatorCadastro.nomeSemestre)} />
                 </Form.Group>
-                {errors.nome && (
+                {errors.nomeSemestre && (
                     <span className="error-message bg-dark text-danger">
                       {errors.nomeSemestre.message}
                     </span>
@@ -51,7 +51,7 @@ const form = () => {
                     <Form.Label>Data Inicio:</Form.Label>
                     <Form.Control type="text" {...register('data_inicio', validatorCadastro.datainicio)} />
                 </Form.Group>
-                {errors.nome && (
+                {errors.datainicio && (
                     <span className="error-message bg-dark text-danger">
                       {errors.datainicio.message}
                     </span>
@@ -62,7 +62,7 @@ const form = () => {
                     <Form.Label>Data fim:</Form.Label>
                     <Form.Control type="text" {...register('data_fim', validatorCadastro.datafim)} />
                 </Form.Group>
-                {errors.nome && (
+                {errors.datafim && (
                     <span className="error-message bg-dark text-danger">
                       {errors.datafim.message}
                     </span>

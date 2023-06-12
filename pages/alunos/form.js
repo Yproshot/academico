@@ -37,7 +37,7 @@ const form = () => {
                     <Form.Label>CPF:</Form.Label>
                     <Form.Control type="text" {...register('cpf', validatorCadastro.cpf)} />
                 </Form.Group>
-                {errors.nome && (
+                {errors.cpf && (
                     <span className="error-message bg-dark text-danger">
                       {errors.cpf.message}
                     </span>
@@ -47,7 +47,7 @@ const form = () => {
                     <Form.Label>Matricula:</Form.Label>
                     <Form.Control type="text" {...register('matricula', validatorCadastro.matricula)} />
                 </Form.Group>
-                {errors.nome && (
+                {errors.matricula && (
                     <span className="error-message bg-dark text-danger">
                       {errors.matricula.message}
                     </span>
@@ -57,7 +57,7 @@ const form = () => {
                     <Form.Label>Email:</Form.Label>
                     <Form.Control type="text" {...register('email', validatorCadastro.email)} />
                 </Form.Group>
-                {errors.nome && (
+                {errors.email && (
                     <span className="error-message bg-dark text-danger">
                       {errors.email.message}
                     </span>
@@ -67,7 +67,7 @@ const form = () => {
                     <Form.Label>Telefone:</Form.Label>
                     <Form.Control type="text" {...register('telefone', validatorCadastro.telefone)} />
                 </Form.Group>
-                {errors.nome && (
+                {errors.telefone && (
                     <span className="error-message bg-dark text-danger">
                       {errors.telefone.message}
                     </span>
@@ -77,7 +77,7 @@ const form = () => {
                     <Form.Label>CEP:</Form.Label>
                     <Form.Control type="text" {...register('cep', validatorCadastro.cep)} />
                 </Form.Group>
-                {errors.nome && (
+                {errors.cep && (
                     <span className="error-message bg-dark text-danger">
                       {errors.cep.message}
                     </span>
@@ -87,7 +87,7 @@ const form = () => {
                     <Form.Label>Logradouro:</Form.Label>
                     <Form.Control type="text" {...register('logradouro', validatorCadastro.logradouro)} />
                 </Form.Group>
-                {errors.nome && (
+                {errors.logradouro && (
                     <span className="error-message bg-dark text-danger">
                       {errors.logradouro.message}
                     </span>
@@ -97,26 +97,26 @@ const form = () => {
                     <Form.Label>Complemento:</Form.Label>
                     <Form.Control type="text" {...register('complemento', validatorCadastro.complemento)} />
                 </Form.Group>
-                {errors.nome && (
+                {errors.complemento && (
                     <span className="error-message bg-dark text-danger">
-                      {errors.logradouro.message}
+                      {errors.complemento.message}
                     </span>
                   )}
                 
                 <Form.Group className="mb-3" controlId="numero">
                     <Form.Label>Numero:</Form.Label>
-                    <Form.Control type="text" {...register('numero', validatorCadastro.logradouro)} />
+                    <Form.Control type="text" {...register('numero', validatorCadastro.numero)} />
                 </Form.Group>
-                {errors.nome && (
+                {errors.numero && (
                     <span className="error-message bg-dark text-danger">
-                      {errors.logradouro.message}
+                      {errors.numero.message}
                     </span>
                   )}
                 <Form.Group className="mb-3" controlId="bairro">
                     <Form.Label>Bairro:</Form.Label>
                     <Form.Control type="text" {...register('bairro', validatorCadastro.bairro)} />
                 </Form.Group>
-                {errors.nome && (
+                {errors.bairro && (
                     <span className="error-message bg-dark text-danger">
                       {errors.bairro.message}
                     </span>

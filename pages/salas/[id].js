@@ -40,7 +40,7 @@ const form = () => {
                     <Form.Label>Nome:</Form.Label>
                     <Form.Control type="text" {...register('nome', validatorCadastro.nomeSala)} />
                 </Form.Group>
-                {errors.nome && (
+                {errors.nomeSala && (
                     <span className="error-message bg-dark text-danger">
                       {errors.nomeSala.message}
                     </span>
@@ -51,7 +51,7 @@ const form = () => {
                     <Form.Label>Capacidade:</Form.Label>
                     <Form.Control type="text" {...register('capacidade', validatorCadastro.capacidadeSala)} />
                 </Form.Group>
-                {errors.nome && (
+                {errors.capacidadeSala && (
                     <span className="error-message bg-dark text-danger">
                       {errors.capacidadeSala.message}
                     </span>
@@ -61,7 +61,7 @@ const form = () => {
                     <Form.Label>Tipo:</Form.Label>
                     <Form.Control type="text" {...register('tipo', validatorCadastro.tipoSala)} />
                 </Form.Group>
-                {errors.nome && (
+                {errors.tipoSala && (
                     <span className="error-message bg-dark text-danger">
                       {errors.tipoSala.message}
                     </span>

@@ -51,7 +51,7 @@ const form = () => {
                     <Form.Label>Curso:</Form.Label>
                     <Form.Control type="text" {...register('curso', validatorCadastro.curso)} />
                 </Form.Group>
-                {errors.nome && (
+                {errors.curso && (
                     <span className="error-message bg-dark text-danger">
                       {errors.curso.message}
                     </span>
