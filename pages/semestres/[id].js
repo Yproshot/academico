@@ -49,7 +49,7 @@ const form = () => {
 
                 <Form.Group className="mb-3" controlId="data_inicio">
                     <Form.Label>Data Inicio:</Form.Label>
-                    <Form.Control type="text" {...register('data_inicio', validatorCadastro.datainicio)} />
+                    <Form.Control maxLength={10} type="text" {...register('data_inicio', validatorCadastro.datainicio)} />
                 </Form.Group>
                 {errors.datainicio && (
                     <span className="error-message bg-dark text-danger">
@@ -60,7 +60,7 @@ const form = () => {
 
                 <Form.Group className="mb-3" controlId="data_fim">
                     <Form.Label>Data fim:</Form.Label>
-                    <Form.Control type="text" {...register('data_fim', validatorCadastro.datafim)} />
+                    <Form.Control maxLength={10} type="text" {...register('data_fim', validatorCadastro.datafim)} />
                 </Form.Group>
                 {errors.datafim && (
                     <span className="error-message bg-dark text-danger">

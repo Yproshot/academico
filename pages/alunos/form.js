@@ -7,6 +7,7 @@ import { useForm } from 'react-hook-form'
 import { BsCheckLg } from 'react-icons/bs'
 import { AiOutlineArrowLeft } from 'react-icons/ai'
 import axios from 'axios'
+import { mask } from 'remask'
 
 const form = () => {
     const { push } = useRouter()
@@ -16,9 +17,16 @@ const form = () => {
 
     axios.post('/api/alunos', dados)
     push('/alunos')
+  }
 
+    function handlechange(event){
+      const name = event.target.name
+      const valor = event.target.value
+      const mascara = event.target.getAttribute('mask')
 
+      setValue(name, mask(valor, mascara));
     }
+
     return (
         <Pagina titulo='Alunos'>
                        <Form>
@@ -35,7 +43,8 @@ const form = () => {
 
                 <Form.Group className="mb-3" controlId="cpf">
                     <Form.Label>CPF:</Form.Label>
-                    <Form.Control type="text" {...register('cpf', validatorCadastro.cpf)} />
+                    <Form.Control mask='999.999.999-99' type="text" {...register('cpf', validatorCadastro.cpf)}
+                    onchange={handlechange} />
                 </Form.Group>
                 {errors.cpf && (
                     <span className="error-message bg-dark text-danger">
@@ -55,7 +64,7 @@ const form = () => {
 
                 <Form.Group className="mb-3" controlId="email">
                     <Form.Label>Email:</Form.Label>
-                    <Form.Control type="text" {...register('email', validatorCadastro.email)} />
+                    <Form.Control type="email" {...register('email', validatorCadastro.email)} />
                 </Form.Group>
                 {errors.email && (
                     <span className="error-message bg-dark text-danger">
