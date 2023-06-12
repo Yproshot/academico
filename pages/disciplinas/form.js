@@ -10,7 +10,7 @@ import axios from 'axios'
 
 const form = () => {
     const { push } = useRouter()
-    const { register, handleSubmit } = useForm()
+    const { register, handleSubmit, setValue, formState: { errors } } = useForm();
 
     function salvar(dados) {
 
@@ -22,16 +22,26 @@ const form = () => {
     return (
         <Pagina titulo='Disciplinas'>
             <Form>
-                <Form.Group className="mb-3" controlId="nome">
+            <Form.Group className="mb-3" controlId="nome">
                     <Form.Label>Nome:</Form.Label>
-                    <Form.Control type="text" {...register('nome')} />
+                    <Form.Control type="text" {...register('nome', validatorCadastro.nome)} />
                 </Form.Group>
+                {errors.nome && (
+                    <span className="error-message bg-dark text-danger">
+                      {errors.nome.message}
+                    </span>
+                  )}
 
 
                 <Form.Group className="mb-3" controlId="curso">
                     <Form.Label>Curso:</Form.Label>
-                    <Form.Control type="text" {...register('curso')} />
+                    <Form.Control type="text" {...register('curso', validatorCadastro.curso)} />
                 </Form.Group>
+                {errors.nome && (
+                    <span className="error-message bg-dark text-danger">
+                      {errors.curso.message}
+                    </span>
+                  )}
 
 
                 <div className='text-center'>

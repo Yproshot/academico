@@ -7,10 +7,11 @@ import { useForm } from 'react-hook-form'
 import { BsCheckLg } from 'react-icons/bs'
 import { AiOutlineArrowLeft } from 'react-icons/ai'
 import axios from 'axios'
+import validatorCadastro from '@/validators/validatorsCadastro'
 
 const form = () => {
     const { push } = useRouter()
-    const { register, handleSubmit } = useForm()
+    const { register, handleSubmit, setValue, formState: { errors } } = useForm();
 
     function salvar(dados) {
 
@@ -22,22 +23,37 @@ const form = () => {
     return (
         <Pagina titulo='Cursos'>
             <Form>
-                <Form.Group className="mb-3" controlId="nome">
+            <Form.Group className="mb-3" controlId="nome">
                     <Form.Label>Nome:</Form.Label>
-                    <Form.Control type="text" {...register('nome')} />
+                    <Form.Control type="text" {...register('nome', validatorCadastro.nome)} />
                 </Form.Group>
+                {errors.nome && (
+                    <span className="error-message bg-dark text-danger">
+                      {errors.nome.message}
+                    </span>
+                  )}
 
 
                 <Form.Group className="mb-3" controlId="duracao">
                     <Form.Label>Duração:</Form.Label>
-                    <Form.Control type="text" {...register('duracao')} />
+                    <Form.Control type="text" {...register('duracao', validatorCadastro.duracao)} />
                 </Form.Group>
+                {errors.nome && (
+                    <span className="error-message bg-dark text-danger">
+                      {errors.duracao.message}
+                    </span>
+                  )}
 
 
                 <Form.Group className="mb-3" controlId="modalidade">
                     <Form.Label>Modalidade:</Form.Label>
-                    <Form.Control type="text" {...register('modalidade')} />
+                    <Form.Control type="text" {...register('modalidade', validatorCadastro.modalidade)} />
                 </Form.Group>
+                {errors.nome && (
+                    <span className="error-message bg-dark text-danger">
+                      {errors.modalidade.message}
+                    </span>
+                  )}
 
 
                 <div className='text-center'>

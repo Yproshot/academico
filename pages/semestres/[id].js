@@ -7,11 +7,12 @@ import { useForm } from "react-hook-form";
 import { BsSave } from "react-icons/bs"
 import { AiOutlineRollback } from "react-icons/ai"
 import axios from "axios";
+import validatorCadastro from "@/validators/validatorsCadastro";
 
 const form = () => {
 
   const { push, query } = useRouter()
-  const { register, handleSubmit, setValue } = useForm()
+  const { register, handleSubmit, setValue, formState: { errors } } = useForm();
 
   useEffect(() => {
     if(query.id){
@@ -37,20 +38,35 @@ const form = () => {
             <Form>
                 <Form.Group className="mb-3" controlId="semestres">
                     <Form.Label>Nome:</Form.Label>
-                    <Form.Control type="text" {...register('nome')} />
+                    <Form.Control type="text" {...register('nome', validatorCadastro.nomeSemestre)} />
                 </Form.Group>
+                {errors.nome && (
+                    <span className="error-message bg-dark text-danger">
+                      {errors.nomeSemestre.message}
+                    </span>
+                  )}
 
 
                 <Form.Group className="mb-3" controlId="data_inicio">
                     <Form.Label>Data Inicio:</Form.Label>
-                    <Form.Control type="text" {...register('data_inicio')} />
+                    <Form.Control type="text" {...register('data_inicio', validatorCadastro.datainicio)} />
                 </Form.Group>
+                {errors.nome && (
+                    <span className="error-message bg-dark text-danger">
+                      {errors.datainicio.message}
+                    </span>
+                  )}
 
 
                 <Form.Group className="mb-3" controlId="data_fim">
                     <Form.Label>Data fim:</Form.Label>
-                    <Form.Control type="text" {...register('data_fim')} />
+                    <Form.Control type="text" {...register('data_fim', validatorCadastro.datafim)} />
                 </Form.Group>
+                {errors.nome && (
+                    <span className="error-message bg-dark text-danger">
+                      {errors.datafim.message}
+                    </span>
+                  )}
 
       <Button variant="primary" onClick={handleSubmit(salvar)}>
         <BsSave className="me-2"/>

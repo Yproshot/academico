@@ -10,7 +10,7 @@ import axios from 'axios'
 
 const form = () => {
     const { push } = useRouter()
-    const { register, handleSubmit } = useForm()
+    const { register, handleSubmit, setValue, formState: { errors } } = useForm();
 
     function salvar(dados) {
 
@@ -22,21 +22,36 @@ const form = () => {
     return (
         <Pagina titulo='Salas'>
             <Form>
-                <Form.Group className="mb-3" controlId="nome">
+            <Form.Group className="mb-3" controlId="nome">
                     <Form.Label>Nome:</Form.Label>
-                    <Form.Control type="text" {...register('nome')} />
+                    <Form.Control type="text" {...register('nome', validatorCadastro.nomeSala)} />
                 </Form.Group>
+                {errors.nome && (
+                    <span className="error-message bg-dark text-danger">
+                      {errors.nomeSala.message}
+                    </span>
+                  )}
 
 
                 <Form.Group className="mb-3" controlId="capacidade">
                     <Form.Label>Capacidade:</Form.Label>
-                    <Form.Control type="text" {...register('capacidade')} />
+                    <Form.Control type="text" {...register('capacidade', validatorCadastro.capacidadeSala)} />
                 </Form.Group>
+                {errors.nome && (
+                    <span className="error-message bg-dark text-danger">
+                      {errors.capacidadeSala.message}
+                    </span>
+                  )}
 
                 <Form.Group className="mb-3" controlId="tipo">
                     <Form.Label>Tipo:</Form.Label>
-                    <Form.Control type="text" {...register('tipo')} />
+                    <Form.Control type="text" {...register('tipo', validatorCadastro.tipoSala)} />
                 </Form.Group>
+                {errors.nome && (
+                    <span className="error-message bg-dark text-danger">
+                      {errors.tipoSala.message}
+                    </span>
+                  )}
 
 
                 <div className='text-center'>
