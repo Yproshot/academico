@@ -8,6 +8,7 @@ import { BsSave } from "react-icons/bs"
 import { AiOutlineRollback } from "react-icons/ai"
 import axios from "axios";
 import validatorCadastro from "@/validators/validatorsCadastro";
+import { mask } from "remask";
 
 const form = () => {
 
@@ -33,6 +34,14 @@ const form = () => {
 
   }
 
+  function handlechange(event){
+    const name = event.target.name
+    const valor = event.target.value
+    const mascara = event.target.getAttribute('mask')
+
+    setValue(name, mask(valor, mascara));
+  }
+
   return (
     <Pagina titulo="Professores">
 <Form>
@@ -49,7 +58,8 @@ const form = () => {
 
                 <Form.Group className="mb-3" controlId="cpf">
                     <Form.Label>CPF:</Form.Label>
-                    <Form.Control type="text" {...register('cpf', validatorCadastro.cpf)} />
+                    <Form.Control mask='999.999.999-99' type="text" {...register('cpf', validatorCadastro.cpf)} 
+                    onChange={handlechange}/>
                 </Form.Group>
                 {errors.cpf && (
                     <span className="error-message bg-dark text-danger">
@@ -90,7 +100,8 @@ const form = () => {
                 
                 <Form.Group className="mb-3" controlId="telefone">
                     <Form.Label>Telefone:</Form.Label>
-                    <Form.Control type="text" {...register('telefone', validatorCadastro.telefone)} />
+                    <Form.Control mask='(99)99999-9999' type="text" {...register('telefone', validatorCadastro.telefone)} 
+                    onChange={handlechange}/>
                 </Form.Group>
                 {errors.telefone && (
                     <span className="error-message bg-dark text-danger">
@@ -100,7 +111,8 @@ const form = () => {
 
                 <Form.Group className="mb-3" controlId="cep">
                     <Form.Label>CEP:</Form.Label>
-                    <Form.Control type="text" {...register('cep', validatorCadastro.cep)} />
+                    <Form.Control mask='99.999-999' type="text" {...register('cep', validatorCadastro.cep)} 
+                    onChange={handlechange}/>
                 </Form.Group>
                 {errors.cep && (
                     <span className="error-message bg-dark text-danger">

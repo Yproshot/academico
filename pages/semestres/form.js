@@ -7,6 +7,8 @@ import { useForm } from 'react-hook-form'
 import { BsCheckLg } from 'react-icons/bs'
 import { AiOutlineArrowLeft } from 'react-icons/ai'
 import axios from 'axios'
+import validatorCadastro from '@/validators/validatorsCadastro'
+import { mask } from 'remask'
 
 const form = () => {
     const { push } = useRouter()
@@ -19,6 +21,16 @@ const form = () => {
 
 
     }
+
+    function handlechange(event){
+      const name = event.target.name
+      const valor = event.target.value
+      const mascara = event.target.getAttribute('mask')
+  
+      setValue(name, mask(valor, mascara));
+    }
+
+
     return (
         <Pagina titulo='Semestres'>
             <Form>
@@ -35,7 +47,8 @@ const form = () => {
 
                 <Form.Group className="mb-3" controlId="data_inicio">
                     <Form.Label>Data Inicio:</Form.Label>
-                    <Form.Control type="text" {...register('data_inicio', validatorCadastro.datainicio)} />
+                    <Form.Control mask='99/99/9999' type="text" {...register('data_inicio', validatorCadastro.datainicio)} 
+                    onChange={handlechange}/>
                 </Form.Group>
                 {errors.datainicio && (
                     <span className="error-message bg-dark text-danger">
@@ -46,7 +59,8 @@ const form = () => {
 
                 <Form.Group className="mb-3" controlId="data_fim">
                     <Form.Label>Data fim:</Form.Label>
-                    <Form.Control type="text" {...register('data_fim', validatorCadastro.datafim)} />
+                    <Form.Control mask='99/99/9999' type="text" {...register('data_fim', validatorCadastro.datafim)} 
+                    onChange={handlechange}/>
                 </Form.Group>
                 {errors.datafim && (
                     <span className="error-message bg-dark text-danger">

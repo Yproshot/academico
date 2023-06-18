@@ -7,6 +7,7 @@ import { useForm } from 'react-hook-form'
 import { BsCheckLg } from 'react-icons/bs'
 import { AiOutlineArrowLeft } from 'react-icons/ai'
 import axios from 'axios'
+import validatorCadastro from '@/validators/validatorsCadastro'
 
 const form = () => {
     const { push } = useRouter()
